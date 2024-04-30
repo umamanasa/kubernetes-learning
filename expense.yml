@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: frontend
+  labels:
+    app.kubernetes.io/name: frontend
+spec:
+  containers:
+    - name: frontend
+      image: rkalluru/frontend
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: catalogue
+  labels:
+    app.kubernetes.io/name: catalogue
+spec:
+  containers:
+    - name: catalogue
+      image: rkalluru/backend
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-expense
+spec:
+  selector:
+    app.kubernetes.io/name: backend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
