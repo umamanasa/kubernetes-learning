@@ -12,9 +12,9 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: catalogue
+  name: backend
   labels:
-    app.kubernetes.io/name: catalogue
+    app.kubernetes.io/name: backend
 spec:
   containers:
     - name: catalogue
@@ -30,4 +30,17 @@ spec:
   ports:
     - protocol: TCP
       port: 80
+      targetPort: 8080
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+spec:
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/name: frontend
+  ports:
+    - port: 80
       targetPort: 8080
